@@ -13,8 +13,5 @@ class LoanServiceImplTest {
     void autoRepay() {
     }
 
-    @Test
-    void initAccount() {
-        loanService.initAccount();
-    }
+
 }
