@@ -1,40 +1,62 @@
 package com.example.lab1.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Loan implements Serializable {
-    private Integer id;
-
+public class Loan {
+    private int id;
     private String iouNum;
-
     private String customerCode;
-
     private String accountNum;
-
-    private Double yearlyRate;
-
-    private Integer repaymentCount;
-
+    private double yearlyRate;
+    private int repaymentCount;
     private Date dueDate;
-
-    private Date loanDate;
-
-    private Double loanCost;
-
-    private Double loanAmount;
-
+    private Date loadDate;
+    private double loadCost;
+    private double loadAmount;
     private String productCode;
-
+    private String productName;
     private String institutionAccountNum;
+    private double dueBalance;
 
-    private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Loan(int id, String iouNum, String customerCode, String accountNum, double yearlyRate, int repaymentCount, Date dueDate, Date loadDate, double loadCost, double loadAmount, String productCode,String institutionAccountNum) {
+        this.id = id;
+        this.iouNum = iouNum;
+        this.customerCode = customerCode;
+        this.accountNum = accountNum;
+        this.yearlyRate = yearlyRate;
+        this.repaymentCount = repaymentCount;
+        this.dueDate = dueDate;
+        this.loadDate = loadDate;
+        this.loadCost = loadCost;
+        this.loadAmount = loadAmount;
+        this.productCode = productCode;
+        this.productName=generateProductName(productCode);//临时写死
+        this.institutionAccountNum=institutionAccountNum;
+    }
+    //手动生成产品名字
+    private String generateProductName(String productCode){
+        switch (productCode){
+            case "40001":return "个体工商户小额贷款";
+            case "85777":return "品名称";
+            case "40002":return "居民住房抵押贷款";
+        }
+        return "个体工商户小额贷款";
+    }
+
+    public String getInstitutionAccountNum() {
+        return institutionAccountNum;
+    }
+
+    public void setInstitutionAccountNum(String institutionAccountNum) {
+        this.institutionAccountNum = institutionAccountNum;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,19 +84,19 @@ public class Loan implements Serializable {
         this.accountNum = accountNum;
     }
 
-    public Double getYearlyRate() {
+    public double getYearlyRate() {
         return yearlyRate;
     }
 
-    public void setYearlyRate(Double yearlyRate) {
+    public void setYearlyRate(double yearlyRate) {
         this.yearlyRate = yearlyRate;
     }
 
-    public Integer getRepaymentCount() {
+    public int getRepaymentCount() {
         return repaymentCount;
     }
 
-    public void setRepaymentCount(Integer repaymentCount) {
+    public void setRepaymentCount(int repaymentCount) {
         this.repaymentCount = repaymentCount;
     }
 
@@ -86,28 +108,28 @@ public class Loan implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public Date getLoanDate() {
-        return loanDate;
+    public Date getLoadDate() {
+        return loadDate;
     }
 
-    public void setLoanDate(Date loanDate) {
-        this.loanDate = loanDate;
+    public void setLoadDate(Date loadDate) {
+        this.loadDate = loadDate;
     }
 
-    public Double getLoanCost() {
-        return loanCost;
+    public double getLoadCost() {
+        return loadCost;
     }
 
-    public void setLoanCost(Double loanCost) {
-        this.loanCost = loanCost;
+    public void setLoadCost(double loadCost) {
+        this.loadCost = loadCost;
     }
 
-    public Double getLoanAmount() {
-        return loanAmount;
+    public double getLoadAmount() {
+        return loadAmount;
     }
 
-    public void setLoanAmount(Double loanAmount) {
-        this.loanAmount = loanAmount;
+    public void setLoadAmount(double loadAmount) {
+        this.loadAmount = loadAmount;
     }
 
     public String getProductCode() {
@@ -118,79 +140,39 @@ public class Loan implements Serializable {
         this.productCode = productCode;
     }
 
-    public String getInstitutionAccountNum() {
-        return institutionAccountNum;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setInstitutionAccountNum(String institutionAccountNum) {
-        this.institutionAccountNum = institutionAccountNum;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Loan other = (Loan) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getIouNum() == null ? other.getIouNum() == null : this.getIouNum().equals(other.getIouNum()))
-            && (this.getCustomerCode() == null ? other.getCustomerCode() == null : this.getCustomerCode().equals(other.getCustomerCode()))
-            && (this.getAccountNum() == null ? other.getAccountNum() == null : this.getAccountNum().equals(other.getAccountNum()))
-            && (this.getYearlyRate() == null ? other.getYearlyRate() == null : this.getYearlyRate().equals(other.getYearlyRate()))
-            && (this.getRepaymentCount() == null ? other.getRepaymentCount() == null : this.getRepaymentCount().equals(other.getRepaymentCount()))
-            && (this.getDueDate() == null ? other.getDueDate() == null : this.getDueDate().equals(other.getDueDate()))
-            && (this.getLoanDate() == null ? other.getLoanDate() == null : this.getLoanDate().equals(other.getLoanDate()))
-            && (this.getLoanCost() == null ? other.getLoanCost() == null : this.getLoanCost().equals(other.getLoanCost()))
-            && (this.getLoanAmount() == null ? other.getLoanAmount() == null : this.getLoanAmount().equals(other.getLoanAmount()))
-            && (this.getProductCode() == null ? other.getProductCode() == null : this.getProductCode().equals(other.getProductCode()))
-            && (this.getInstitutionAccountNum() == null ? other.getInstitutionAccountNum() == null : this.getInstitutionAccountNum().equals(other.getInstitutionAccountNum()));
+    public double getDueBalance() {
+        return dueBalance;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getIouNum() == null) ? 0 : getIouNum().hashCode());
-        result = prime * result + ((getCustomerCode() == null) ? 0 : getCustomerCode().hashCode());
-        result = prime * result + ((getAccountNum() == null) ? 0 : getAccountNum().hashCode());
-        result = prime * result + ((getYearlyRate() == null) ? 0 : getYearlyRate().hashCode());
-        result = prime * result + ((getRepaymentCount() == null) ? 0 : getRepaymentCount().hashCode());
-        result = prime * result + ((getDueDate() == null) ? 0 : getDueDate().hashCode());
-        result = prime * result + ((getLoanDate() == null) ? 0 : getLoanDate().hashCode());
-        result = prime * result + ((getLoanCost() == null) ? 0 : getLoanCost().hashCode());
-        result = prime * result + ((getLoanAmount() == null) ? 0 : getLoanAmount().hashCode());
-        result = prime * result + ((getProductCode() == null) ? 0 : getProductCode().hashCode());
-        result = prime * result + ((getInstitutionAccountNum() == null) ? 0 : getInstitutionAccountNum().hashCode());
-        return result;
+    public void setDueBalance(double dueBalance) {
+        this.dueBalance = dueBalance;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", iouNum=").append(iouNum);
-        sb.append(", customerCode=").append(customerCode);
-        sb.append(", accountNum=").append(accountNum);
-        sb.append(", yearlyRate=").append(yearlyRate);
-        sb.append(", repaymentCount=").append(repaymentCount);
-        sb.append(", dueDate=").append(dueDate);
-        sb.append(", loanDate=").append(loanDate);
-        sb.append(", loanCost=").append(loanCost);
-        sb.append(", loanAmount=").append(loanAmount);
-        sb.append(", productCode=").append(productCode);
-        sb.append(", institutionAccountNum=").append(institutionAccountNum);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Loan{" +
+                "id=" + id +
+                ", iouNum='" + iouNum + '\'' +
+                ", customerCode='" + customerCode + '\'' +
+                ", accountNum='" + accountNum + '\'' +
+                ", yearlyRate=" + yearlyRate +
+                ", repaymentCount=" + repaymentCount +
+                ", dueDate=" + dueDate +
+                ", loadDate=" + loadDate +
+                ", loadCost=" + loadCost +
+                ", loadAmount=" + loadAmount +
+                ", productCode='" + productCode + '\'' +
+                ", productName='" + productName + '\'' +
+                ", institutionAccountNum='" + institutionAccountNum + '\'' +
+                ", dueBalance=" + dueBalance +
+                '}';
     }
 }

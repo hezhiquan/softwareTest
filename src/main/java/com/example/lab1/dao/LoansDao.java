@@ -1,9 +1,10 @@
 package com.example.lab1.dao;
 
 import com.example.lab1.entity.Loan;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface LoansDao {
 //      找出客户的所有贷款
     List<Loan> findLoansByCustomerCode(String customerCode);

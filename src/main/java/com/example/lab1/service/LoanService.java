@@ -4,8 +4,8 @@ import com.example.lab1.entity.Customer;
 import com.example.lab1.entity.Loan;
 import com.example.lab1.entity.RepayPlan;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface LoanService  {
     String autoRepay();
@@ -13,9 +13,9 @@ public interface LoanService  {
     List<Loan> findLoansByCustomerCode(String customerCode);
     RepayPlan findRepayPlanById(int id);
     List<RepayPlan> findRepayPlansByIouNum(String iouNum);
-    HashMap<String,String> repayPart(String iouNum, double repayAmount);
+    Map<String,String> repayPart(String iouNum, double repayAmount);
     List<RepayPlan> findUnPayPlans(String iouNum);
     String repayFine(String iouNum);
-    HashMap<String,String> repayAll(String iouNum);
+    Map<String,String> repayAll(String iouNum);
     boolean payFineOfCard(String accountNum);
 }

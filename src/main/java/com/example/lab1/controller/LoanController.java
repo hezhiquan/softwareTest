@@ -1,6 +1,7 @@
 package com.example.lab1.controller;
 
 import com.example.lab1.service.LoanService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,14 +10,16 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @RestController
+
 public class LoanController {
     @Autowired
     private LoanService loanService;
     Logger logger=Logger.getLogger(LoanController.class.getName());
 
 
-    //自动归还贷款
+    //
     @GetMapping("/autoRepay")
+    @ApiOperation("自动归还贷款")
     public ResponseEntity<?> autoRepay(){
         HashMap<String,String> res=new HashMap<>();
         res.put("message",loanService.autoRepay());
@@ -28,6 +31,7 @@ public class LoanController {
      * @param idNumber
      * @return
      */
+    @ApiOperation("通过身份证号查询客户信息")
     @GetMapping("/loan/customerInfo")
     public ResponseEntity<?> findCustomerByIdNumber(@RequestParam String idNumber){
         return ResponseEntity.ok(loanService.findCustomerByIdNumber(idNumber));
@@ -39,6 +43,7 @@ public class LoanController {
      * @return
      */
     @GetMapping("/loan/customerLoans")
+    @ApiOperation("通过客户号查询客户自己的所有贷款")
     public ResponseEntity<?> findLoansByCustomerCode(@RequestParam("code") String customerCode){
         logger.info("传入的code为"+customerCode);
         return ResponseEntity.ok(loanService.findLoansByCustomerCode(customerCode));
@@ -52,6 +57,7 @@ public class LoanController {
      * @return
      */
     @GetMapping("/loan/repayPlans")
+    @ApiOperation("通过借据号查询该贷款的所有分期计划")
     public ResponseEntity<?> findRepayPlansByIouNum(@RequestParam String iouNum){
 
         return ResponseEntity.ok(loanService.findRepayPlansByIouNum(iouNum));
@@ -63,6 +69,7 @@ public class LoanController {
      * @return
      */
     @GetMapping("/loan/repayPlanDetail")
+    @ApiOperation("通过还款计划的id查看某贷款的具体一期还款计划")
     public ResponseEntity<?> findRepayPlanById(@RequestParam int id){
         return ResponseEntity.ok(loanService.findRepayPlanById(id));
     }
@@ -73,6 +80,7 @@ public class LoanController {
      * @return
      */
     @GetMapping("/loan/unPayPlans")
+    @ApiOperation("通过借据号找到旗下所有未还的还款计划")
     public ResponseEntity<?> findUnPayPlans(@RequestParam String iouNum){
         return ResponseEntity.ok(loanService.findUnPayPlans(iouNum));
     }
@@ -83,6 +91,7 @@ public class LoanController {
      * @return
      */
     @PostMapping("/loan/fine")
+    @ApiOperation("通过借据号归还罚金")
     public ResponseEntity<?> repayFine(@RequestBody Map<String,String> params){
         String iouNum=params.get("iouNum");
         HashMap<String,String> res=new HashMap<>();
@@ -109,6 +118,7 @@ public class LoanController {
      * @return
      */
     @PostMapping("/loan/repay/all")
+    @ApiOperation("在已归还罚金的前提下，归还全款")
     public  ResponseEntity<?> repayAll(@RequestBody Map<String,String> params){
         String iouNum=params.get("iouNum");
 
@@ -120,6 +130,7 @@ public class LoanController {
      * @param accountNum
      * @return
      */
+    @ApiOperation("通过银行卡号来归还该卡欠的所有罚金")
     @GetMapping("/loan/payFineOfCard")
     public ResponseEntity<?> payFineOfCard(@RequestParam String accountNum){
         HashMap<String,String> res=new HashMap<>();

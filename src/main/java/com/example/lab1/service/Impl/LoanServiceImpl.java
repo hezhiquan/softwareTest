@@ -1,6 +1,5 @@
 package com.example.lab1.service.Impl;
 
-
 import com.example.lab1.dao.CardsDao;
 import com.example.lab1.dao.CustomersDao;
 import com.example.lab1.dao.LoansDao;
@@ -54,7 +53,7 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
                 if (canRepay(unPayPlanList.get(i).getIouNum(),unPayPlanList.get(i).getFine())){
                     //归还罚金后，将账单状态设为2(逾期，但已还罚金),罚金设为0
                     unPayPlanList.get(i).setStatus(2);
-                    unPayPlanList.get(i).setFine(0);
+                    unPayPlanList.get(i).setFine(0.0);
                 }else{
                     //余额无法归还罚金，更新数据后，直接退出
                     repayPlansDao.updateRepayPlan(unPayPlanList.get(i));
@@ -65,9 +64,9 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
             if (canRepay(unPayPlanList.get(i).getIouNum(),unPayPlanList.get(i).getRemainAmount())){
                 //归还欠款后，把状态设为3(正常还款),并清空欠款
                 unPayPlanList.get(i).setStatus(3);
-                unPayPlanList.get(i).setRemainAmount(0);
-                unPayPlanList.get(i).setRemainInterest(0);
-                unPayPlanList.get(i).setRemainPrincipal(0);
+                unPayPlanList.get(i).setRemainAmount((double) 0);
+                unPayPlanList.get(i).setRemainInterest((double) 0);
+                unPayPlanList.get(i).setRemainPrincipal((double) 0);
             }
 
             //更新数据库
@@ -127,7 +126,7 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
                 logger.info("归还罚金 还款计划为 "+repayPlanList.get(i));
                 if (repayPlanList.get(i).getStatus()==1){
                     repayPlanList.get(i).setStatus(2);
-                    repayPlanList.get(i).setFine(0);
+                    repayPlanList.get(i).setFine((double) 0);
                     //更新到数据库
                     logger.info("更新前的还款计划 "+repayPlanList.get(i));
                     repayPlansDao.updateRepayPlan(repayPlanList.get(i));
@@ -238,7 +237,7 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
     public HashMap<String,String> repayPart(String iouNum,double amountToPay){
 
 
-        HashMap<String,String> res=new HashMap<>();
+        HashMap<String,String> res=new HashMap<String,String>();
         if (Math.abs(calculateFine(iouNum))>0.001){
             logger.info("repayPart:在未归还罚金时尝试部分还款");
             res.put("message","fail,please repay fine first");
@@ -259,9 +258,9 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
                         if (amount>=repayPlanList.get(i).getRemainAmount()){
                             amount-=repayPlanList.get(i).getRemainAmount();
                             repayPlanList.get(i).setStatus(3);
-                            repayPlanList.get(i).setRemainPrincipal(0);
-                            repayPlanList.get(i).setRemainInterest(0);
-                            repayPlanList.get(i).setRemainAmount(0);
+                            repayPlanList.get(i).setRemainPrincipal((double) 0);
+                            repayPlanList.get(i).setRemainInterest((double) 0);
+                            repayPlanList.get(i).setRemainAmount((double) 0);
 
                         }else {
                             repayPlanList.get(i).setRemainAmount(repayPlanList.get(i).getRemainAmount()-amount);
@@ -287,7 +286,7 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
      * @return
      */
     public HashMap<String,String> repayAll(String iouNum){
-        HashMap<String,String> res=new HashMap<>();
+        HashMap<String,String> res=new HashMap<String,String>();
 
         double amount=calculateALLRepayment(iouNum);//计算要还款的总额
         if (canRepay(iouNum,amount)){
@@ -296,9 +295,9 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
                 //如果还款时间在下个月之前，且未还款
                 if (repayPlanList.get(i).getPlanDate().before(getOneMonthAfter())&&repayPlanList.get(i).getStatus()!=3){
                     repayPlanList.get(i).setStatus(3);
-                    repayPlanList.get(i).setRemainAmount(0);
-                    repayPlanList.get(i).setRemainInterest(0);
-                    repayPlanList.get(i).setRemainPrincipal(0);
+                    repayPlanList.get(i).setRemainAmount((double) 0);
+                    repayPlanList.get(i).setRemainInterest((double) 0);
+                    repayPlanList.get(i).setRemainPrincipal((double) 0);
                     //更新数据库
                     repayPlansDao.updateRepayPlan(repayPlanList.get(i));
                 }
