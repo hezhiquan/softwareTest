@@ -13,4 +13,5 @@ select * from loans where iou_num=#{iouNum}
     <select id="findLoansByAccountNum" resultType="Loan">
         select * from loans where account_num=#{accountNum}
     </select>
+
 </mapper>

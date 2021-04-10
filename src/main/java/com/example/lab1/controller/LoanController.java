@@ -142,6 +142,17 @@ public class LoanController {
         return ResponseEntity.ok(res);
     }
 
+    /**
+     * 通过银行卡号获得该卡旗下的所有贷款总额
+     * @param accountNum
+     * @return
+     */
+    @ApiOperation("通过银行卡号获得该卡旗下的所有贷款总额")
+    @GetMapping("/loan/unPayLoansAmount")
+    public ResponseEntity<?> getUnPayLoanAmount(@RequestParam String accountNum){
+        return ResponseEntity.ok(loanService.getUnPayLoanAmount(accountNum));
+    }
+
 
 
 }

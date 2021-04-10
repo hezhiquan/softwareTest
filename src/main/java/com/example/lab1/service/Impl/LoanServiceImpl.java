@@ -381,4 +381,16 @@ public class LoanServiceImpl implements com.example.lab1.service.LoanService {
 
     }
 
+    public double getUnPayLoanAmount(String accountNum){
+        List<Loan> loanList=loansDao.findLoansByAccountNum(accountNum);
+        double sum=0;
+        for(Loan loan:loanList){
+            List<RepayPlan> repayPlanList=repayPlansDao.findRepayPlansByIouNum(loan.getIouNum());
+            for (int i = 0; i < repayPlanList.size(); i++) {
+                sum+=repayPlanList.get(i).getRemainAmount()+repayPlanList.get(i).getFine();
+            }
+        }
+        return sum;
+    }
+
 }

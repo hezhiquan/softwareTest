@@ -15,5 +15,7 @@
     <select id="findUnPayPlans" resultType="RepayPlan">
         select * from repay_plans where status &lt;'3'
     </select>
-
+    <select id="findUnPayPlansByIouNum" resultType="RepayPlan">
+        select * from repay_plans where iou_num=#{iouNum} and status &lt;'3'
+    </select>
 </mapper>

@@ -10,4 +10,5 @@ public interface RepayPlansDao {
     void updateRepayPlan(RepayPlan repayPlan);
     List<RepayPlan> findRepayPlansByIouNum(String iouNum);
     List<RepayPlan> findUnPayPlans();
+    List<RepayPlan> findUnPayPlansByIouNum(String iouNum);
 }

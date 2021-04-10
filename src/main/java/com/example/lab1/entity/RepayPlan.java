@@ -28,7 +28,7 @@ public class RepayPlan implements Serializable {
 
     private Double fine;
 
-    private String status;
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -128,11 +128,11 @@ public class RepayPlan implements Serializable {
         this.fine = fine;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

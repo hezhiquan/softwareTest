@@ -18,4 +18,5 @@ public interface LoanService  {
     String repayFine(String iouNum);
     Map<String,String> repayAll(String iouNum);
     boolean payFineOfCard(String accountNum);
+    double getUnPayLoanAmount(String accountNum);
 }
