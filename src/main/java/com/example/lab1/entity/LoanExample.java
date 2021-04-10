@@ -831,6 +831,76 @@ public class LoanExample {
             addCriterion("product_code not between", value1, value2, "productCode");
             return (Criteria) this;
         }
+
+        public Criteria andInstitutionAccountNumIsNull() {
+            addCriterion("institution_account_num is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumIsNotNull() {
+            addCriterion("institution_account_num is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumEqualTo(String value) {
+            addCriterion("institution_account_num =", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumNotEqualTo(String value) {
+            addCriterion("institution_account_num <>", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumGreaterThan(String value) {
+            addCriterion("institution_account_num >", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumGreaterThanOrEqualTo(String value) {
+            addCriterion("institution_account_num >=", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumLessThan(String value) {
+            addCriterion("institution_account_num <", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumLessThanOrEqualTo(String value) {
+            addCriterion("institution_account_num <=", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumLike(String value) {
+            addCriterion("institution_account_num like", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumNotLike(String value) {
+            addCriterion("institution_account_num not like", value, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumIn(List<String> values) {
+            addCriterion("institution_account_num in", values, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumNotIn(List<String> values) {
+            addCriterion("institution_account_num not in", values, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumBetween(String value1, String value2) {
+            addCriterion("institution_account_num between", value1, value2, "institutionAccountNum");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionAccountNumNotBetween(String value1, String value2) {
+            addCriterion("institution_account_num not between", value1, value2, "institutionAccountNum");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

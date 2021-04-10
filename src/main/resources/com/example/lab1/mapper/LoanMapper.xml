@@ -13,6 +13,7 @@
     <result column="loan_cost" property="loanCost" jdbcType="DOUBLE" />
     <result column="loan_amount" property="loanAmount" jdbcType="DOUBLE" />
     <result column="product_code" property="productCode" jdbcType="VARCHAR" />
+    <result column="institution_account_num" property="institutionAccountNum" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     id, iou_num, customer_code, account_num, yearly_rate, repayment_count, due_date, 
-    loan_date, loan_cost, loan_amount, product_code
+    loan_date, loan_cost, loan_amount, product_code, institution_account_num
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.lab1.entity.LoanExample" >
     select
@@ -113,11 +114,11 @@
     insert into loan (iou_num, customer_code, account_num, 
       yearly_rate, repayment_count, due_date, 
       loan_date, loan_cost, loan_amount, 
-      product_code)
+      product_code, institution_account_num)
     values (#{iouNum,jdbcType=VARCHAR}, #{customerCode,jdbcType=VARCHAR}, #{accountNum,jdbcType=VARCHAR}, 
       #{yearlyRate,jdbcType=DOUBLE}, #{repaymentCount,jdbcType=INTEGER}, #{dueDate,jdbcType=DATE}, 
       #{loanDate,jdbcType=DATE}, #{loanCost,jdbcType=DOUBLE}, #{loanAmount,jdbcType=DOUBLE}, 
-      #{productCode,jdbcType=VARCHAR})
+      #{productCode,jdbcType=VARCHAR}, #{institutionAccountNum,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.lab1.entity.Loan" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
@@ -155,6 +156,9 @@
       <if test="productCode != null" >
         product_code,
       </if>
+      <if test="institutionAccountNum != null" >
+        institution_account_num,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="iouNum != null" >
@@ -186,6 +190,9 @@
       </if>
       <if test="productCode != null" >
         #{productCode,jdbcType=VARCHAR},
+      </if>
+      <if test="institutionAccountNum != null" >
+        #{institutionAccountNum,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +238,9 @@
       <if test="record.productCode != null" >
         product_code = #{record.productCode,jdbcType=VARCHAR},
       </if>
+      <if test="record.institutionAccountNum != null" >
+        institution_account_num = #{record.institutionAccountNum,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +258,8 @@
       loan_date = #{record.loanDate,jdbcType=DATE},
       loan_cost = #{record.loanCost,jdbcType=DOUBLE},
       loan_amount = #{record.loanAmount,jdbcType=DOUBLE},
-      product_code = #{record.productCode,jdbcType=VARCHAR}
+      product_code = #{record.productCode,jdbcType=VARCHAR},
+      institution_account_num = #{record.institutionAccountNum,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +297,9 @@
       <if test="productCode != null" >
         product_code = #{productCode,jdbcType=VARCHAR},
       </if>
+      <if test="institutionAccountNum != null" >
+        institution_account_num = #{institutionAccountNum,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -300,7 +314,8 @@
       loan_date = #{loanDate,jdbcType=DATE},
       loan_cost = #{loanCost,jdbcType=DOUBLE},
       loan_amount = #{loanAmount,jdbcType=DOUBLE},
-      product_code = #{productCode,jdbcType=VARCHAR}
+      product_code = #{productCode,jdbcType=VARCHAR},
+      institution_account_num = #{institutionAccountNum,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
